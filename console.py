@@ -54,9 +54,53 @@ class HBNBCommand(Cmd):
         else:
             print("** class name missing **")
 
+
+    def do_destroy(self, line):
+        line_tokenized = HBNBCommand.do_manage(line)
+
+        if line_tokenized:
+            try:
+                HBNBCommand.__dict_class[line_tokenized[0]]
+            except BaseException:
+                print("** class doesn't exist **")
+                return
+
+            if len(line_tokenized) >= 2 and line_tokenized[1]:
+                key = line_tokenized[0]+"."+line_tokenized[1]
+                dictionary = storage.all()
+                try:
+                    del(dictionary[key])
+                    storage.save()
+                except BaseException:
+                    print("** no instance found **")
+                    return
+            else:
+                print("** instance id missing **")
+                return
+        else:
+            print("** class name missing **")
+
+    def do_all(self, line):
+
+        line_tokenized = HBNBCommand.do_manage(line)
+        if line_tokenized:
+            try:
+                HBNBCommand.__dict_class[line_tokenized[0]]
+            except BaseException:
+                print("** class doesn't exist **")
+                return
+
+            dictionary = storage.all()
+
+            for key, value in dictionary.items():
+                token = key
+                token = str(token).split(".")
+                if token[0] == line_tokenized[0]:
+                    print(dictionary[key])
+        
     def do_manage(line):
         tokens = shlex.split(line)
-        return (list(tokens))
+        return list(tokens)
 
 
 if __name__ == '__main__':
