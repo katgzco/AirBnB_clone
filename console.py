@@ -165,11 +165,45 @@ class HBNBCommand(cmd.Cmd):
         return list(tokens)
 
     def default(self, line):
-        """this function print or execute an action if the control is true """
+        """this function print or execute an action if the control is true
+        """
         line_token = line.split(".")
         if len(line_token) >= 2 and line_token[0] in HBNBCommand.__dict_class:
             if line_token[1] == "all()":
                 HBNBCommand.do_all(self, line_token[0])
+            # count the class
+            if line_token[1] == "count()":
+                HBNBCommand.do_counter(self, line_token[0])
+        if line_token[1][0] == "s":
+            tmp = line_token[1]
+            comand = tmp[0:4]
+            star = tmp.index("\"")
+            end = tmp.index(")")
+            cls_id = tmp[(star + 1):(end - 1)]
+            if comand == "show":
+                key = line_token[0]+" " + cls_id
+                HBNBCommand.do_show(self, key)
+        if line_token[1][0] == "d":
+            tmp = line_token[1]
+            comand = tmp[0:7]
+            star = tmp.index("\"")
+            end = tmp.index(")")
+            cls_id = tmp[(star + 1):(end - 1)]
+            if comand == "destroy":
+                key = line_token[0]+" " + cls_id
+                HBNBCommand.do_destroy(self, key)
+
+    def do_counter(self, line):
+        """ Counter of class
+        """
+        dictionary = storage.all()
+        count = 0
+        tmp_key = ""
+        for key, value in dictionary.items():
+            tmp_key = key.split(".")
+            if tmp_key[0] == line:
+                count += 1
+        print(count)
 
 
 if __name__ == '__main__':
