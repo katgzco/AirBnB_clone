@@ -28,6 +28,7 @@ class HBNBCommand(Cmd):
         return True
 
     def do_emptyline(self, line):
+        """ an empty line + ENTER shouldn’t execute anything """
         pass
 
     def do_create(self, line):
@@ -118,6 +119,10 @@ class HBNBCommand(Cmd):
         print(list_objects)
 
     def do_update(self, line):
+        """
+        Updates an instance based on the class name and
+        id by adding or updating attribute
+        """
         line_tokenized = HBNBCommand.do_manage(line)
 
         if line:
@@ -152,6 +157,7 @@ class HBNBCommand(Cmd):
             print("** class name missing **")
 
     def manage(line):
+        """ splits the line arguments splits and return an array """
         tokens = shlex.split(line)
         return list(tokens)
 
