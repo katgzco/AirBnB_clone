@@ -33,21 +33,21 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """an empty line + ENTER shouldn’t execute anything
         """
-        return
+        pass
 
     def do_create(self, line):
         """Creates a new instance of the class
         """
         line_tokenized = HBNBCommand.do_manage(line)
+
         if line_tokenized:
             if not line_tokenized[0] in HBNBCommand.__dict_class:
                 print("** class doesn't exist **")
                 return
-
-                instance = HBNBCommand.__dict_class[line_tokenized[0]]()
-                storage.save()
-                print(instance.id)
-
+            instance = HBNBCommand.__dict_class[line_tokenized[0]]()
+            print(instance)
+            storage.save()
+            print(instance.id)
         else:
             print("** class name missing **")
 
