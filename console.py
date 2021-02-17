@@ -14,7 +14,7 @@ import shlex
 class HBNBCommand(Cmd):
 
     __dict_class = {"BaseModel": BaseModel, "User": User,
-                    "City": City, "State": State, "Place": Place, 
+                    "City": City, "State": State, "Place": Place,
                     "Amenity": Amenity, "Review": Review}
 
     prompt = "(hbnb) "
@@ -27,32 +27,34 @@ class HBNBCommand(Cmd):
         """ to exit the program """
         return True
 
+    def do_emptyline(self, line):
+        pass
+
     def do_create(self, line):
         """ Creates a new instance of the class """
         line_tokenized = HBNBCommand.do_manage(line)
         if line_tokenized:
-                if not line_tokenized[0] in HBNBCommand.__dict_class:
-                    print("** class doesn't exist **")
-                    return
-#Creation
+            if not line_tokenized[0] in HBNBCommand.__dict_class:
+                print("** class doesn't exist **")
+                return
+
                 instance = HBNBCommand.__dict_class[line_tokenized[0]]()
                 storage.save()
-                print(instance.id)           
+                print(instance.id)
         else:
             print("** class name missing **")
 
     def do_show(self, line):
-        """ 
-        Prints the string representation of an instance 
+        """
+        Prints the string representation of an instance
         based on the class name
         """
         line_tokenized = HBNBCommand.do_manage(line)
 
         if line_tokenized:
-            
             if not line_tokenized[0] in HBNBCommand.__dict_class:
-                    print("** class doesn't exist **")
-                    return
+                print("** class doesn't exist **")
+                return
 
             if len(line_tokenized) >= 2 and line_tokenized[1]:
                 key = line_tokenized[0]+"."+line_tokenized[1]
@@ -94,14 +96,14 @@ class HBNBCommand(Cmd):
 
     def do_all(self, line):
         """
-        Prints all string representation of all 
+        Prints all string representation of all
         instances based or not on the class name
         """
         line_tokenized = HBNBCommand.do_manage(line)
         if line_tokenized:
             if not line_tokenized[0] in HBNBCommand.__dict_class:
-                    print("** class doesn't exist **")
-                    return
+                print("** class doesn't exist **")
+                return
 
         dictionary = storage.all()
         list_objects = []
