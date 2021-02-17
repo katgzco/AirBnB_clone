@@ -193,6 +193,19 @@ class HBNBCommand(cmd.Cmd):
                 key = line_token[0]+" " + cls_id
                 HBNBCommand.do_destroy(self, key)
 
+        if line_token[1][0] == "u":
+            tmp = line_token[1]
+            comand = tmp[0:6]
+            star = tmp.index("\"")
+            end = tmp.index(")")
+            input_update = tmp[star:end]
+            input_update = input_update.split(",")
+            cls_id = input_update[0][1:-1]
+            name_atr = input_update[1][1:]
+            value_atr = input_update[2][1:]
+            key = line_token[0]+" "+cls_id+" "+name_atr+" "+value_atr
+            HBNBCommand.do_update(self, key)
+
     def do_counter(self, line):
         """ Counter of class
         """
