@@ -3,6 +3,7 @@
 
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """ Class that inherits from BaseModel
     Public class attributes:
@@ -15,4 +16,3 @@ class User(BaseModel):
     password = ""
     first_name = ""
     last_name = ""
-    
