@@ -30,10 +30,10 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
-    def do_emptyline(self, line):
+    def emptyline(self):
         """an empty line + ENTER shouldn’t execute anything
         """
-        pass
+        return
 
     def do_create(self, line):
         """Creates a new instance of the class
