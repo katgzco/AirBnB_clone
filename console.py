@@ -164,6 +164,13 @@ class HBNBCommand(cmd.Cmd):
         tokens = shlex.split(line)
         return list(tokens)
 
+    def default(self, line):
+        """this function print or execute an action if the control is true """
+        line_token = line.split(".")
+        if len(line_token) >= 2 and line_token[0] in HBNBCommand.__dict_class:
+            if line_token[1] == "all()":
+                HBNBCommand.do_all(self, line_token[0])
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
