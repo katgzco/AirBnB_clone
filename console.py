@@ -152,11 +152,9 @@ class HBNBCommand(cmd.Cmd):
             if not len(line_tokenized) >= 4:
                 print("** value missing **")
                 return
-
             instance = dictionary[key].__dict__
-            line_tokenized[3] = str(line_tokenized[3])
             instance[line_tokenized[2]] = line_tokenized[3]
-            instance.save()
+            dictionary.get(key).save()
         else:
             print("** class name missing **")
 
