@@ -1,35 +1,55 @@
 #!/usr/bin/python3
+""" Module FileStorage """
 from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 import json
 
-class FileStorage:
 
+class FileStorage:
+    """ Class that serializes instances to JSON file
+    and deserializes JSON file to instances
+    Private class Atributes:
+        __file_path (str): path with .json
+        __objects   (dic): dictionary of dictionaries
+    Public instance methods:
+        all(), new(), save(), and reload()
+    """
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        return FileStorage.__objects
+        """ Returns the dictionary __objects """
+        return self.__objects
 
     def new(self, obj):
-        key = "{}.{}".format(obj.__class__.__name__,obj.id)
-        FileStorage.__objects.update({key:obj})
+        """
+        set in __objects the obj with key <ob class name>.id
+        Args:
+        obj (dictionary):
+        """
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
+        """ serialize __objects to the JSON file """
         dict_for_json = {}
-        for key, value in FileStorage.__objects.items():
+        for key, value in self.__objects.items():
             dict_for_json[key] = value.to_dict()
 
-        with open(FileStorage.__file_path, mode="w", encoding="utf-8") as json_file_dump:
+        with open(self.__file_path, mode="w") as json_file_dump:
             json.dump(dict_for_json, json_file_dump, indent=2)
 
-
     def reload(self):
-            try:
-                with open(FileStorage.__file_path, mode="r", encoding="utf-8") as json_file_load:
-                   for key, value in (json.loads(json_file_load)).items():
-                        new_obj = eval(value["__class__"] + "(**value)")
-                        FileStorage.__objects[key] = new_obj
-            except BaseException:
-                pass
-
-
+        """ Method that desearializes the JSON file to __objects """
+        try:
+            with open(self.__file_path, mode="r") as json_file_load:
+                for key, value in (json.load(json_file_load)).items():
+                    self.__objects[key] = eval(value["__class__"] +
+                                               "(**value)")
+        except BaseException:
+            pass
