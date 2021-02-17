@@ -45,7 +45,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             instance = HBNBCommand.__dict_class[line_tokenized[0]]()
-            print(instance)
             storage.save()
             print(instance.id)
         else:
