@@ -12,21 +12,6 @@ class TestFileStorage(TestCase):
 
     def test_A_pep8_conformance(self):
         """Test that we conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/file_storage.py',
-                                        'tests/test_models/test_file_storage.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
-
-    def test_module_doc(self):
-        """ check for module documentation """
-        self.assertTrue(len(FileStorage.__doc__) > 0)
-
-    def test_class_doc(self):
-        """ check for documentation """
-        self.assertTrue(len(FileStorage.__doc__) > 0)
-
-    def test_method_docs(self):
-        """ check for method documentation """
-        for func in dir(FileStorage):
-            self.assertTrue(len(func.__doc__) > 0)
+        fchecker = pep8.Checker("models/engine/file_storage", show_source=True)
+        file_errors = fchecker.check_all()
+        self.assertEqual(file_errors, 0)
