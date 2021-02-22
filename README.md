@@ -253,6 +253,10 @@ _class name_._update("\_id_", "_attribute name_", "_attribute value_")\_
 [User] (f7f699fa-0ef1-4cf0-8a7c-64365c681098) {'id': 'f7f699fa-0ef1-4cf0-8a7c-64365c681098', 'created_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432978), 'updated_at': datetime.datetime(2021, 2, 22, 12, 36, 55, 196754), 'first_name': 'Katherin'}
 ```
 
+And if you can destroy any instace you can use command _destroy_
+
+Sintax:
+
 ### None interactive Mode:
 
 ```
