@@ -180,6 +180,8 @@ based on the class name
 Updates an instance based on the class name and
 id by adding or updating attribute
 
+(hbnb) help quit
+Quit command to exit the program
 ```
 
 ========== NOW WE ARE USE THE COMMANDS ===========
@@ -210,6 +212,15 @@ sintax: _className_._show_("_id_") or _show_ _className_ _id_
 ```
 (hbnb) User.show("f7f699fa-0ef1-4cf0-8a7c-64365c681098")
 [User] (f7f699fa-0ef1-4cf0-8a7c-64365c681098) {'id': 'f7f699fa-0ef1-4cf0-8a7c-64365c681098', 'created_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432978), 'updated_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432992)}
+```
+
+You can know the number of the objects using command _counter_
+
+Sintax: _counter_ _className_
+
+```
+(hbnb) counter User
+2
 ```
 
 ### None interactive Mode:
