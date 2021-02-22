@@ -23,7 +23,6 @@ This project you find the fisrt step for you create a command interpreter to man
   <td>2</td>
   <td>console.py</td>
   <td> In this file you find all commands of the console.
-    
   <td>
 </tr>
 <tr>
@@ -177,8 +176,30 @@ Deletes an instance based on the class name and id
 
 ====== NOW WE ARE USE THE COMMANDS ======
 
+Sintax: _command_ _className_
+
+```
+(hbnb) create User
+f7f699fa-0ef1-4cf0-8a7c-64365c681098
 ```
 
+Prints all string representation of all instances based or not on the class name there are two way:
+
+Sintax: _command_ _className_ or
+_className_._command_()
+
+```
+(hbnb) all User
+["[User] (f7f699fa-0ef1-4cf0-8a7c-64365c681098) {'id': 'f7f699fa-0ef1-4cf0-8a7c-64365c681098', 'created_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432978), 'updated_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432992)}"]
+```
+
+Prints the string representation of an instance based on the class name. with command _show_
+
+sintax: _className_._show_("_id_") or _show_ _className_ _id_
+
+```
+(hbnb) User.show("f7f699fa-0ef1-4cf0-8a7c-64365c681098")
+[User] (f7f699fa-0ef1-4cf0-8a7c-64365c681098) {'id': 'f7f699fa-0ef1-4cf0-8a7c-64365c681098', 'created_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432978), 'updated_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432992)}
 ```
 
 None interactive Mode:
