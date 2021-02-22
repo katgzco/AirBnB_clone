@@ -4,31 +4,55 @@
 import pep8
 from unittest import TestCase
 from models.base_model import BaseModel
-from models import review
-
-Review = review.Review
+from models.review import Review
 
 
-class TestBase(TestCase):
-    """ test class Review """
+class TestReview(TestCase):
+    """ test class City """
+    @classmethod
+    def setUpClass(cls):
+        """Define all attributes for test the class methods
+        """
+        cls.review = Review()
 
-    def test_A_pep8_conformance(self):
-        """Test that we conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/review.py',
-                                        'tests/test_models/test_review.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    @classmethod
+    def tearDownClass(cls):
+        """After run the Test clase remove the instance create
+        for the test
+        """
+        del cls.review
 
-    def test_module_doc(self):
-        """ check for module documentation """
-        self.assertTrue(len(Review.__doc__) > 0)
+    def test_pep8_conformance(self):
+        """Test that we conforms to PEP8.
+        """
+        style = pep8.StyleGuide()
+        result = style.check_files(["models/base_model.py"])
+        self.assertEqual(result.total_errors, 0, "Fix pep8")
 
-    def test_class_doc(self):
-        """ check for documentation """
-        self.assertTrue(len(Review.__doc__) > 0)
+    def test_docstring(self):
+        """ Test doc strings
+        """
+        self.assertIsNotNone(Review.__doc__)
+        self.assertIsNotNone(Review.__init__.__doc__)
 
-    def test_method_docs(self):
-        """ check for method documentation """
-        for func in dir(Review):
-            self.assertTrue(len(func.__doc__) > 0)
+    def test_inherits_BaseModel(self):
+        """Test if the innstance is a subclas of BaseModel
+        """
+        self.assertTrue(issubclass(type(self.review), BaseModel))
+
+    def test_inicialization(self):
+        """Test initizalition of the instance
+        """
+        self.assertTrue(hasattr(self.review, "place_id"))
+        self.assertIsInstance(self.review.state_id, str)
+        self.assertTrue(self.review.state_id == "")
+        self.assertTrue(hasattr(self.review, "user_id"))
+        self.assertIsInstance(self.review.user_id, str)
+        self.assertTrue(self.review.user_id == "")
+        self.assertTrue(hasattr(self.review, "text"))
+        self.assertIsInstance(self.review.text, str)
+        self.assertTrue(self.review.text == "")
+
+
+if __name__ == "__main__":
+    unittest.main()

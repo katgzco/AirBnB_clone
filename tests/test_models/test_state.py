@@ -1,34 +1,48 @@
 #!/usr/bin/python3
-""" Module Unittest for State """
+""" Module Unittest for City """
 
 import pep8
 from unittest import TestCase
 from models.base_model import BaseModel
-from models import state
-
-State = state.State
+from models.state import State
 
 
-class TestBase(TestCase):
-    """ test class State """
+class TestState(TestCase):
+    """ test class City """
+    @classmethod
+    def setUpClass(cls):
+        """Define all attributes for test the class methods
+        """
+        cls.state = State()
 
-    def test_A_pep8_conformance(self):
-        """Test that we conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/state.py',
-                                        'tests/test_models/test_state.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    @classmethod
+    def tearDownClass(cls):
+        """After run the Test clase remove the instance create
+        for the test
+        """
+        del cls.state
 
-    def test_module_doc(self):
-        """ check for module documentation """
-        self.assertTrue(len(State.__doc__) > 0)
+    def test_pep8_conformance(self):
+        """Test that we conforms to PEP8.
+        """
+        style = pep8.StyleGuide()
+        result = style.check_files(["models/base_model.py"])
+        self.assertEqual(result.total_errors, 0, "Fix pep8")
 
-    def test_class_doc(self):
-        """ check for documentation """
-        self.assertTrue(len(State.__doc__) > 0)
+    def test_docstring(self):
+        """ Test doc strings
+        """
+        self.assertIsNotNone(State.__doc__)
+        self.assertIsNotNone(State.__init__.__doc__)
 
-    def test_method_docs(self):
-        """ check for method documentation """
-        for func in dir(State):
-            self.assertTrue(len(func.__doc__) > 0)
+    def test_inherits_BaseModel(self):
+        """Test if the innstance is a subclas of BaseModel
+        """
+        self.assertTrue(issubclass(type(self.state), BaseModel))
+
+    def test_inicialization(self):
+        """Test initizalition of the instance
+        """
+        self.assertTrue(hasattr(self.state, "name"))
+        self.assertIsInstance(self.state.name, str)
+        self.assertTrue(self.state.name == "")

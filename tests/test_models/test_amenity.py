@@ -4,31 +4,49 @@
 import pep8
 from unittest import TestCase
 from models.base_model import BaseModel
-from models import amenity
-
-Amenity = amenity.Amenity
+from models.amenity import Amenity
 
 
 class TestAmenity(TestCase):
     """ test class Amenity """
+    @classmethod
+    def setUpClass(cls):
+        """Define all attributes for test the class methods
+        """
+        cls.amenity1 = Amenity()
 
-    def test_A_pep8_conformance(self):
-        """Test that we conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/amenity.py',
-                                        'tests/test_models/test_amenity.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    @classmethod
+    def tearDownClass(cls):
+        """After run the Test clase remove the instance create
+        for the test
+        """
+        del cls.amenity1
 
-    def test_module_doc(self):
-        """ check for module documentation """
-        self.assertTrue(len(Amenity.__doc__) > 0)
+    def test_pep8_conformance(self):
+        """Test that we conforms to PEP8.
+        """
+        style = pep8.StyleGuide()
+        result = style.check_files(["models/base_model.py"])
+        self.assertEqual(result.total_errors, 0, "Fix pep8")
 
-    def test_class_doc(self):
-        """ check for documentation """
-        self.assertTrue(len(Amenity.__doc__) > 0)
+    def test_docstring(self):
+        """ Test doc strings
+        """
+        self.assertIsNotNone(Amenity.__doc__)
+        self.assertIsNotNone(Amenity.__init__.__doc__)
 
-    def test_method_docs(self):
-        """ check for method documentation """
-        for func in dir(Amenity):
-            self.assertTrue(len(func.__doc__) > 0)
+    def test_inherits_BaseModel(self):
+        """Test if the innstance is a subclas of BaseModel
+        """
+        self.assertTrue(issubclass(type(self.amenity1), BaseModel))
+
+    def test_inicialization(self):
+        """Test initizalition of the instance
+        """
+        self.assertTrue(hasattr(self.amenity1, "name"))
+        self.assertIsInstance(self.amenity1.name, str)
+        self.assertTrue(self.amenity1.name == "")
+
+
+if __name__ == "__main__":
+    unittest.main()

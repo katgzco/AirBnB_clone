@@ -4,31 +4,52 @@
 import pep8
 from unittest import TestCase
 from models.base_model import BaseModel
-from models import city
-
-City = city.City
+from models.city import City
 
 
-class TestBase(TestCase):
+class TestCity(TestCase):
     """ test class City """
+    @classmethod
+    def setUpClass(cls):
+        """Define all attributes for test the class methods
+        """
+        cls.city1 = City()
 
-    def test_A_pep8_conformance(self):
-        """Test that we conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/city.py',
-                                        'tests/test_models/test_city.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    @classmethod
+    def tearDownClass(cls):
+        """After run the Test clase remove the instance create
+        for the test
+        """
+        del cls.city1
 
-    def test_module_doc(self):
-        """ check for module documentation """
-        self.assertTrue(len(City.__doc__) > 0)
+    def test_pep8_conformance(self):
+        """Test that we conforms to PEP8.
+        """
+        style = pep8.StyleGuide()
+        result = style.check_files(["models/base_model.py"])
+        self.assertEqual(result.total_errors, 0, "Fix pep8")
 
-    def test_class_doc(self):
-        """ check for documentation """
-        self.assertTrue(len(City.__doc__) > 0)
+    def test_docstring(self):
+        """ Test doc strings
+        """
+        self.assertIsNotNone(City.__doc__)
+        self.assertIsNotNone(City.__init__.__doc__)
 
-    def test_method_docs(self):
-        """ check for method documentation """
-        for func in dir(City):
-            self.assertTrue(len(func.__doc__) > 0)
+    def test_inherits_BaseModel(self):
+        """Test if the innstance is a subclas of BaseModel
+        """
+        self.assertTrue(issubclass(type(self.city1), BaseModel))
+
+    def test_inicialization(self):
+        """Test initizalition of the instance
+        """
+        self.assertTrue(hasattr(self.city1, "state_id"))
+        self.assertIsInstance(self.city1.state_id, str)
+        self.assertTrue(self.city1.state_id == "")
+        self.assertTrue(hasattr(self.city1, "name"))
+        self.assertIsInstance(self.city1.name, str)
+        self.assertTrue(self.city1.name == "")
+
+
+if __name__ == "__main__":
+    unittest.main()
