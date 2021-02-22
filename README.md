@@ -146,10 +146,10 @@ On the console you have the posibility to manage the objects of our project
 
 You can start in two Modes:
 
-Interactiva Mode:
+### Interactiva Mode:
+
 you need execute the file console.py, and then you can use the command help and you know the commands.
 
-So if you wnat creat new intance like User, Place, Review, State
 `$ ./console.py`
 
 ```
@@ -157,24 +157,34 @@ So if you wnat creat new intance like User, Place, Review, State
 
 Documented commands (type help <topic>):
 ========================================
-EOF  all  create  destroy  help  quit  show
-
-Undocumented commands:
-======================
-update
+EOF  all  counter  create  destroy  help  manage  quit  show  update
 
 (hbnb) help all
 Prints all string representation of all
-        instances based or not on the class name
+instances based or not on the class name
+
 (hbnb) help create
 Creates a new instance of the class
 
 (hbnb) help destroy
 Deletes an instance based on the class name and id
 
+(hbnb) help counter
+ Counter of class
+
+(hbnb) help show
+Prints the string representation of an instance
+based on the class name
+
+(hbnb) help update
+Updates an instance based on the class name and
+id by adding or updating attribute
+
 ```
 
-====== NOW WE ARE USE THE COMMANDS ======
+========== NOW WE ARE USE THE COMMANDS ===========
+
+So if you want to creat new intance like User, Place, Review, State
 
 Sintax: _command_ _className_
 
@@ -190,7 +200,7 @@ _className_._command_()
 
 ```
 (hbnb) all User
-["[User] (f7f699fa-0ef1-4cf0-8a7c-64365c681098) {'id': 'f7f699fa-0ef1-4cf0-8a7c-64365c681098', 'created_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432978), 'updated_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432992)}"]
+["[User] (f7f699fa-0ef1-4cf0-8a7c-64365c681098) {'id': 'f7f699fa-0ef1-4cf0-8a7c-64365c681098', 'created_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432978), 'updated_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432992)}", "[User] (18e264e0-b528-42ad-b325-79372d85d795) {'id': '18e264e0-b528-42ad-b325-79372d85d795', 'created_at': datetime.datetime(2021, 2, 22, 10, 16, 52, 234498), 'updated_at': datetime.datetime(2021, 2, 22, 10, 16, 52, 234509)}"]
 ```
 
 Prints the string representation of an instance based on the class name. with command _show_
@@ -202,7 +212,7 @@ sintax: _className_._show_("_id_") or _show_ _className_ _id_
 [User] (f7f699fa-0ef1-4cf0-8a7c-64365c681098) {'id': 'f7f699fa-0ef1-4cf0-8a7c-64365c681098', 'created_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432978), 'updated_at': datetime.datetime(2021, 2, 22, 10, 7, 25, 432992)}
 ```
 
-None interactive Mode:
+### None interactive Mode:
 
 ```
 $ echo "help" | ./console.py
