@@ -255,7 +255,13 @@ _class name_._update("\_id_", "_attribute name_", "_attribute value_")\_
 
 And if you can destroy any instace you can use command _destroy_
 
-Sintax:
+Sintax: _class name_._destroy_(_id_) or _destroy_ _class name_ _id_
+
+```
+(hbnb) User.destroy("f7f699fa-0ef1-4cf0-8a7c-64365c681098")
+(hbnb) User.show("f7f699fa-0ef1-4cf0-8a7c-64365c681098")
+** no instance found **
+```
 
 ### None interactive Mode:
 
